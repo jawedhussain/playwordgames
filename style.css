@@ -35,6 +35,12 @@ body{
     
 }
 
+#inputContainer{
+    position: absolute;
+    top: 1000px;
+ }
+
+
 
 
 #imageContainer{
