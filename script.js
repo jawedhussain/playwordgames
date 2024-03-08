@@ -953,6 +953,9 @@ let vocabArray=["Whisper","Annoy","Yawn","Consent","Plead","Provide","Abstain","
  ]
 
 
+ console.log(vocabArray.length)
+
+
  let ArrayOfImages=[   Whisper,Annoy,Yawn,Consent,Plead,Provide,Abstain,Vain,Storm,
      Compulsion,Neglect,Resolve,Lick,Courage,Inevitable,Sneeze,Begger,Disaster,Distraught,Economical,Emphasize,Endure,
      Extravagant,
@@ -990,7 +993,7 @@ let vocabArray=["Whisper","Annoy","Yawn","Consent","Plead","Provide","Abstain","
 
 
  ]
-
+ 
 
  let ArrayOfAudios=[
    whisperAudio,annoyAudio,yawnAudio,consentAudio,pleadAudio,provideAudio,abstainAudio,vainAudio,
@@ -1057,8 +1060,47 @@ mainContainer.appendChild(header1)
 }
 
 
+
+
+// adding max range here
+
+let maxField=document.getElementById('maxField')
+let submitButton1=document.getElementById('submitButton1')
+
+let maxRetrivedValue=sessionStorage.getItem('maxValueKey')
+
+if(maxRetrivedValue===null){
+    var b2=302
+    sessionStorage.setItem('maxValueKey',b2)
+}
+
+else{
+         b2=maxRetrivedValue
+    
+}
+
+
+
+
+
+submitButton1.addEventListener('click',()=>{
+    
+    b2=maxField.value
+    sessionStorage.setItem('maxValueKey',b2)
+    window.location.reload()
+
+
+
+
+
+})
+
 let a2=0
-let b2=ArrayOfImages.length-1
+
+// ending max range code here
+
+
+
 
 
 let random2=Math.round(a2+(b2-a2)*Math.random())
@@ -1168,7 +1210,7 @@ setTimeout(() => {
               gifContainer.appendChild(gifElement)
               body.appendChild(gifContainer)
               err.textContent="right answer"
-              audio.play()
+            //   audio.play()
               err.classList.add('rightAnswer')
               shower.appendChild(err)
               intialRightScore++
@@ -1205,7 +1247,7 @@ setTimeout(() => {
               gifContainer.appendChild(gifElement)
               body.appendChild(gifContainer)
               err.textContent="right answer"
-              audio.play()
+            //   audio.play()
               err.classList.add('rightAnswer')
               shower.appendChild(err)
               intialRightScore++
@@ -1240,7 +1282,7 @@ setTimeout(() => {
               gifContainer.appendChild(gifElement)
               body.appendChild(gifContainer)
               err.textContent="right answer"
-              audio.play()
+            //   audio.play()
               err.classList.add('rightAnswer')
               shower.appendChild(err)
               intialRightScore++
@@ -1274,7 +1316,7 @@ setTimeout(() => {
               gifContainer.appendChild(gifElement)
               body.appendChild(gifContainer)
               err.textContent="right answer"
-              audio.play()
+            //   audio.play()
               err.classList.add('rightAnswer')
               shower.appendChild(err)
               intialRightScore++
