@@ -953,7 +953,7 @@ let vocabArray=["Whisper","Annoy","Yawn","Consent","Plead","Provide","Abstain","
  ]
 
 
- console.log(vocabArray.length)
+//  console.log(vocabArray.length)
 
 
  let ArrayOfImages=[   Whisper,Annoy,Yawn,Consent,Plead,Provide,Abstain,Vain,Storm,
@@ -1051,13 +1051,7 @@ let vocabArray=["Whisper","Annoy","Yawn","Consent","Plead","Provide","Abstain","
  ]
 
 
-for(let i=0;i<ArrayOfAudios.length;i++){
-    let mainContainer=document.getElementById('mainContainer')
-let header1=document.createElement('audio')
-header1.setAttribute('src',ArrayOfAudios[i])
-mainContainer.appendChild(header1)
 
-}
 
 
 
@@ -1095,22 +1089,61 @@ submitButton1.addEventListener('click',()=>{
 
 })
 
-let a2=0
+
 
 // ending max range code here
 
 
+// adding min range here
+
+let minField=document.getElementById('minField')
+
+
+let minRetrivedValue=sessionStorage.getItem('minValueKey')
+
+if(maxRetrivedValue===null){
+    var a2=0
+    sessionStorage.setItem('minValueKey',a2)
+}
+
+else{
+         a2=minRetrivedValue
+    
+}
 
 
 
-let random2=Math.round(a2+(b2-a2)*Math.random())
 
-let random3=Math.round(a2+(b2-a2)*Math.random())
 
-let random4=Math.round(a2+(b2-a2)*Math.random())
+submitButton1.addEventListener('click',()=>{
+    
+    a2=minField.value
+    sessionStorage.setItem('minValueKey',a2)
+    window.location.reload()
 
-let random5=Math.round(a2+(b2-a2)*Math.random())
+
+
+
+
+})
+
+
+
+let b3=parseInt(b2)
+let a3=parseInt(a2)
+let random2=Math.round(a3+(b3-a3)*Math.random())
+
+let random3=Math.round(a3+(b3-a3)*Math.random())
+
+let random4=Math.round(a3+(b3-a3)*Math.random())
+
+let random5=Math.round(a3+(b3-a3)*Math.random())
 let checker=0
+
+console.log(random2)
+console.log(random3)
+console.log(random4)
+console.log(random5)
 
 let Image1
 let Image2
@@ -1124,15 +1157,18 @@ let mainInterval= setInterval(() => {
 
 
     else{
-        random2=Math.round(a2+(b2-a2)*Math.random())
-        random3=Math.round(a2+(b2-a2)*Math.random())
-        random4=Math.round(a2+(b2-a2)*Math.random())
-        random5=Math.round(a2+(b2-a2)*Math.random())
+        random2=Math.round(a3+(b3-a3)*Math.random())
+
+        random3=Math.round(a3+(b3-a3)*Math.random())
+
+        random4=Math.round(a3+(b3-a3)*Math.random())
+
+        random5=Math.round(a3+(b3-a3)*Math.random())
     }
 
     
     
-}, 1);
+}, 0.000001);
 
 
 
