@@ -1100,7 +1100,9 @@ else{
 
 
 submitButton1.addEventListener('click',(event)=>{
-
+    //  event.preventDefault()
+    
+  
     if(maxField.value < minField.value){
         b2 = minField.value
         a2=maxField.value
@@ -1109,13 +1111,13 @@ submitButton1.addEventListener('click',(event)=>{
         b2 = maxField.value
         a2 = minField.value
     }
-    
+   
     sessionStorage.setItem('maxValueKey',b2)
     sessionStorage.setItem('minValueKey',a2)
-  if(document.getElementById('minField').value !="" && document.getElementById('maxField').value !=""){
-    window.location.reload()
+   if(document.getElementById('minField').value !="" && document.getElementById('maxField').value !=""){
+    event.preventDefault()
+    location.replace("/")
    }
-  
 })
 
 
@@ -1154,7 +1156,7 @@ let mainInterval= setInterval(() => {
         random5=Math.round(a3+(b3-a3)*Math.random())
     }
 
-    
+    console.log("*****************hellooo*********************")
     
     
 },4);
