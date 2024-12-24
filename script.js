@@ -1051,11 +1051,6 @@ let vocabArray=["Whisper","Annoy","Yawn","Consent","Plead","Provide","Abstain","
  ]
 
 
-window.addEventListener('load',()=>{
-    event.preventDefault()
-    let element = document.getElementById('mainContainer')
-    element.scrollIntoView()
-})
 
 
 
@@ -1105,17 +1100,27 @@ else{
 
 
 submitButton1.addEventListener('click',(event)=>{
-  
-    a2=minField.value
-    sessionStorage.setItem('minValueKey',a2)
-    b2=maxField.value
-    sessionStorage.setItem('maxValueKey',b2)
 
+    
+  
+    if(maxField.value < minField.value){
+        b2 = minField.value
+        a2=maxField.value
+    }
+    else{
+        b2 = maxField.value
+        a2 = minField.value
+    }
+    
+    sessionStorage.setItem('maxValueKey',b2)
+    sessionStorage.setItem('minValueKey',a2)
+  
 })
 
 
 
 let b3=parseInt(b2)
+b3 = b3-1
 let a3=parseInt(a2)
 let random2=Math.round(a3+(b3-a3)*Math.random())
 
@@ -1126,10 +1131,6 @@ let random4=Math.round(a3+(b3-a3)*Math.random())
 let random5=Math.round(a3+(b3-a3)*Math.random())
 let checker=0
 
-console.log(random2)
-console.log(random3)
-console.log(random4)
-console.log(random5)
 
 let Image1
 let Image2
@@ -1154,8 +1155,15 @@ let mainInterval= setInterval(() => {
 
     
     
-}, 0.000001);
+    
+},4);
 
+
+window.addEventListener('load',()=>{
+    let element = document.getElementById('mainContainer')
+    element.scrollIntoView()
+    // 
+})
 
 
 setTimeout(() => {
@@ -1183,6 +1191,7 @@ setTimeout(() => {
 
        mainWord.textContent=vocabArray[randomArray[random6]] 
       console.log(mainWord.textContent)
+      clearInterval(mainInterval)
   
       
     
