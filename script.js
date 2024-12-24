@@ -1101,8 +1101,6 @@ else{
 
 submitButton1.addEventListener('click',(event)=>{
 
-    
-  
     if(maxField.value < minField.value){
         b2 = minField.value
         a2=maxField.value
@@ -1114,6 +1112,9 @@ submitButton1.addEventListener('click',(event)=>{
     
     sessionStorage.setItem('maxValueKey',b2)
     sessionStorage.setItem('minValueKey',a2)
+  if(document.getElementById('minField').value !="" && document.getElementById('maxField').value !=""){
+    window.location.reload()
+   }
   
 })
 
