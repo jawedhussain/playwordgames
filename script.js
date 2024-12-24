@@ -1051,7 +1051,11 @@ let vocabArray=["Whisper","Annoy","Yawn","Consent","Plead","Provide","Abstain","
  ]
 
 
-
+window.addEventListener('load',()=>{
+    event.preventDefault()
+    let element = document.getElementById('mainContainer')
+    element.scrollIntoView()
+})
 
 
 
@@ -1073,20 +1077,6 @@ else{
     
 }
 
-
-
-
-
-submitButton1.addEventListener('click',(event)=>{
-  
-    a2=minField.value
-    sessionStorage.setItem('minValueKey',a2)
-    b2=maxField.value
-    sessionStorage.setItem('maxValueKey',b2)
-   if(document.getElementById('minField').value !="" && document.getElementById('maxField').value !=""){
-    window.location.reload()
-   }
-})
 
 
 
@@ -1114,7 +1104,16 @@ else{
 
 
 
-
+submitButton1.addEventListener('click',(event)=>{
+  
+    a2=minField.value
+    sessionStorage.setItem('minValueKey',a2)
+    b2=maxField.value
+    sessionStorage.setItem('maxValueKey',b2)
+   if(document.getElementById('minField').value !="" && document.getElementById('maxField').value !=""){
+    window.location.reload()
+   }
+})
 
 
 
@@ -1175,9 +1174,7 @@ setTimeout(() => {
   
     }) 
 
-    scroolup.addEventListener('click',()=>{
-       
-    })
+   
     
    
     
