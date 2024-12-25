@@ -1116,7 +1116,7 @@ submitButton1.addEventListener('click',(event)=>{
     sessionStorage.setItem('minValueKey',a2)
    if(document.getElementById('minField').value !="" && document.getElementById('maxField').value !=""){
     event.preventDefault()
-    location.replace("https://jawedhussain.github.io/playwordgames/")
+    window.location.reload()
    }
 })
 
