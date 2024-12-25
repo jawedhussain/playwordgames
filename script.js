@@ -1111,6 +1111,12 @@ submitButton1.addEventListener('click',(event)=>{
         b2 = maxField.value
         a2 = minField.value
     }
+
+    b2 = parseInt(b2)
+    a2 = parseInt(a2)
+    if ((b2 - a2) <10){
+        b2 = a2 +10
+    }
    
     sessionStorage.setItem('maxValueKey',b2)
     sessionStorage.setItem('minValueKey',a2)
@@ -1140,27 +1146,28 @@ let Image2
 let Image3
 let Image4
 
-let mainInterval= setInterval(() => {
+while (checker != 1){
+
     if(ArrayOfImages[random2]!=ArrayOfImages[random3] && ArrayOfImages[random2]!=ArrayOfImages[random4] && ArrayOfImages[random2]!=ArrayOfImages[random5] && ArrayOfImages[random3]!=ArrayOfImages[random4] && ArrayOfImages[random3]!=ArrayOfImages[random5] && ArrayOfImages[random4]!=ArrayOfImages[random5]){
         checker=1
-    }
+       }
+       
+       
+       
+       else{  random2=Math.round(a3+(b3-a3)*Math.random())
+           
+           random3=Math.round(a3+(b3-a3)*Math.random())
+           
+           random4=Math.round(a3+(b3-a3)*Math.random())
 
+           random5=Math.round(a3+(b3-a3)*Math.random())
+       }
+   
 
-    else{
-        random2=Math.round(a3+(b3-a3)*Math.random())
-
-        random3=Math.round(a3+(b3-a3)*Math.random())
-
-        random4=Math.round(a3+(b3-a3)*Math.random())
-
-        random5=Math.round(a3+(b3-a3)*Math.random())
-    }
-
-    console.log("*****************hellooo*********************")
-    
-    
-},4);
-
+       console.log("*****************hellooo*********************")
+   }
+   
+   
 
 window.addEventListener('load',()=>{
     let element = document.getElementById('mainContainer')
@@ -1194,7 +1201,6 @@ setTimeout(() => {
 
        mainWord.textContent=vocabArray[randomArray[random6]] 
       console.log(mainWord.textContent)
-      clearInterval(mainInterval)
   
       
     
@@ -1207,7 +1213,7 @@ setTimeout(() => {
       
 
        wordNumber.textContent=randomArray[random6]+1
-    if(checker=1){
+    if(checker==1){
            
      Image1=document.createElement('img')
     Image1.setAttribute('src',ArrayOfImages[random2])
