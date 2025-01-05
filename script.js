@@ -26,7 +26,7 @@ let scroolup=document.getElementById('scroolup')
  
 
 let Whisper="./whisper.jpg"
-let Mumble="./Whisper.jpg"
+let Mumble="./whisper.jpg"
 let Annoy='./annoy.jpg'
 let Yawn='./yawn.jpg'
 let Consent='./consent.png'
