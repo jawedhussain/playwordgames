@@ -3,11 +3,11 @@
 <head>
 
   <script src="https://kit.fontawesome.com/30097378c8.js" crossorigin="anonymous"></script>
-        <link rel="preconnect" href="https://fonts.googleapis.com" >
+        <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Edu+NSW+ACT+Foundation:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="style2.css">
+ <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style2.css">  -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,9 +34,12 @@
             <audio id="speakAloud" src=""></audio>
             <div id="shower"></div>
             <div class="images" id="imagesId">
+              <img src="./humble.jpeg" alt="" id="image1" >
+              <img src="./ignore.webp" alt="" id="image2">
+              <img src="./abandon.jpg" alt="" id="image3">
+              <img src="./adopt.jpg" alt="" id="image4">
             </div>
-            <h1 id="scoreRight">Right:<span id="rightScoreValue"></span></h1>
-            <h1 id="scoreWrong">Wrong:<span id="wrongScoreValue"></span></h1>
+   
           
         </div>
 
@@ -45,27 +48,24 @@
               <div id="scroolup"> <img src="pppppp.png" alt="" height="50px" width="50px"> </div>
             </a>
         
-       <!-- <audio id="audio" src="correct.mp3"></audio>-->
+       
 
        <div id="inputContainer">
-        <div style="text-align: center; text-transform: capitalize;margin-bottom: 5px;">min and max should be 10 apart</div>
-        <form>
-         <input type="number" name="min" id="minField" placeholder="min Range" required>
-         <input type="number" name="max" id="maxField" placeholder="Max Range" required>
-         <button type="submit" name="submitButton1" id="submitButton1">Submit</button>
-        </form>    
-      </div>
 
-       <div id="part2"  style="text-decoration: underline; position: absolute; top: 800px; color: red; font-size: 22px;">
-         <a href="https://jawedhussain.github.io/playwordgames2/" target="_blank" style="text-decoration: none;">Visit And Play WordGame2</a>
-       </div>
+        <p id="total_shower_container">Total number of words is <span id="total_number_of_words"></span></p>
+        <p id="min_max_shower_container">Currently   selected range is <span id="show_min_range"></span>-<span id="show_max_range"></span></p>
+        <form >
+            <input type="number" name="min" id="minField" placeholder="Min Range" required style="margin-bottom: 5px;">
+            <input type="number" name="max" id="maxField" placeholder="Max Range" required style="margin-bottom: 5px;">
+            <button type="submit" name="submitButton1" id="submitButton1">Submit</button>
+        </form>
         
-      
+        
+    </div>
 
-     
 
-
-<div id="meaningContent">
+    
+<div id="referenceContainer">
   
     <div class="content">
         <p class="word" id="Whisper2" >1. Whisper(verb)</p><span class="dot">:</span><span class="dash">-</span> <p class="meaning">फुसफुसाना</p>
@@ -1232,7 +1232,7 @@
   <div class="sentenceExample"><span class="example">ex:-</span><p class="sentence">There is plenty of coal in this area. </p></div>
 </div>
 
-
+<!-- yaha par galti hua hai  -->
 
 
 
@@ -1262,7 +1262,7 @@
 </div>
 
 <div class="content">
-  <p class="word" id="Landslide2">213. Landslide (noun)</p><span class="dot">:</span><span class="dash">-</span> <p class="meaning">जमीन का खिसक या धस जाना    </p>
+  <p class="word" id="Landslide2">213. Landslide (noun)</p><span class="dot">:</span><span class="dash">-</span> <p class="meaning">जमीन के एक बड़े टुकड़े का पहाड़ पर से फिसल जाना   </p>
   <div class="sentenceExample"><span class="example">ex:-</span><p class="sentence">The floods caused a landslide. </p></div>
 </div>
 
@@ -1902,13 +1902,8 @@
 </div >
 
 
-
-
-
-
-<!-- everything will come inside it  -->
-
     </div>
- <script src="script.js"></script>   
+ <script src="./audio/upgrade.js"></script>   
+ <script src="https://js.puter.com/v2/"></script>
 </body>
 </html>
