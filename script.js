@@ -10,23 +10,16 @@ let wordNumber=document.getElementById('wordNumber')
 let btn=document.getElementById('btn')
 let audio=document.getElementById('audio')
 let body=document.getElementById('body')
-
 let gifSource='./rightanswer.gif'
 let gifContainer=document.createElement('div')
 gifContainer.setAttribute('id','fireWork')
-
 let PlayButton=document.getElementById('playButton')
 let SpeakAloud=document.getElementById('speakAloud')
-
 let mainwordlink=document.getElementById('mainwordlink')
-
 let scroolup=document.getElementById('scroolup')
 
-
- 
-
 let Whisper="./whisper.jpg"
-let Mumble="./whisper.jpg"
+let Mumble="./Whisper.jpg"
 let Annoy='./annoy.jpg'
 let Yawn='./yawn.jpg'
 let Consent='./consent.png'
@@ -861,58 +854,6 @@ let rockAudio='./rock.mp3'
 
 
 
-
-
-
-let intialRightScore
-let intialWrongScore
-
-
-// for right score
-if(sessionStorage.getItem('rightScore')==0){
-    intialRightScore=0
-    rightScoreValue.textContent=intialRightScore
-}
-else(
-    intialRightScore=sessionStorage.getItem('rightScore')
-)
-
-// for worng score
-
-if(sessionStorage.getItem('wrongScore')==0){
-    intialWrongScore=0
-    wrongScoreValue.textContent=intialWrongScore
-}
-else(
-    intialWrongScore=sessionStorage.getItem('wrongScore')
-)
-
-rightScoreValue.textContent=0
-wrongScoreValue.textContent=0
-
-let retrievedRightScore=sessionStorage.getItem('rightScore')
-let retrievedWrongScore=sessionStorage.getItem('wrongScore')
-// adding rightScore to the session storage
-if(retrievedRightScore===null){
-    var scoreValueRight=0
-    sessionStorage.setItem('rightScore',JSON.stringify(scoreValueRight))
-}
-else{
-    scoreValueRight=JSON.parse(retrievedRightScore)
-    rightScoreValue.textContent=scoreValueRight
-}
-
-// adding wrongScore to the session storage
-
-if(retrievedWrongScore===null){
-    var scoreValueWrong=0
-    sessionStorage.setItem('wrongScore',JSON.stringify(scoreValueWrong))
-}
-else{
-    scoreValueWrong=JSON.parse(retrievedWrongScore)
-    wrongScoreValue.textContent=scoreValueWrong
-}
-
 // vocabulary array
 let vocabArray=["Whisper","Annoy","Yawn","Consent","Plead","Provide","Abstain","Vain","Storm",
     "Compulsion","Neglect","Resolve","Lick","Courage","Inevitable",'Sneeze','Begger','Disaster',
@@ -953,7 +894,7 @@ let vocabArray=["Whisper","Annoy","Yawn","Consent","Plead","Provide","Abstain","
  ]
 
 
-//  console.log(vocabArray.length)
+// saving the arrary of world in the local_storage
 
 
  let ArrayOfImages=[   Whisper,Annoy,Yawn,Consent,Plead,Provide,Abstain,Vain,Storm,
@@ -1050,344 +991,306 @@ let vocabArray=["Whisper","Annoy","Yawn","Consent","Plead","Provide","Abstain","
      ,preventionAudio,moistureAudio,rockAudio,coverAudio  
  ]
 
+let image1 = document.getElementById("image1")
+let image2 = document.getElementById("image2")
+let image3 = document.getElementById("image3")
+let image4 = document.getElementById("image4")
+
+let images_element_list = [image1,image2,image3,image4]
+ 
+
+/// showing tota numbers of words in the game
+total_number_of_words.textContent = vocabArray.length
 
 
 
 
 
-// adding max range here
 
-let maxField=document.getElementById('maxField')
-let submitButton1=document.getElementById('submitButton1')
+// showing the maximum value for the index which can be set while giving custom minimum and maximum index via input
 
-let maxRetrivedValue=sessionStorage.getItem('maxValueKey')
 
-if(maxRetrivedValue===null){
-    var b2=302
-    sessionStorage.setItem('maxValueKey',b2)
+// adding max range code start here here
+
+let maxField = document.getElementById("maxField"); // input field of the max input
+let submitButton1 = document.getElementById("submitButton1"); // submit button for the max and min input field
+
+let maxRetrivedValue = localStorage.getItem("maxValueKey"); // getting the maxvalue from localStorage if it exist
+
+// if there is no max value in the localStorage setting it equal to images array length
+if (maxRetrivedValue === null) {
+  min_max_shower_container.style.display = 'None'
+  var b2 = 9; // as length return total number of element however index starts from zero so the index will go upto length - 1
+  localStorage.setItem("maxValueKey", b2);
 }
 
-else{
-         b2=maxRetrivedValue
-    
+// if it is present in the localStorage saving the value of max in b2
+else {
+  b2 = maxRetrivedValue;
+   min_max_shower_container.style.display = 'Block'
+   show_max_range.textContent = parseInt(maxRetrivedValue) + 1
 }
-
-
-
-
-// ending max range code here
 
 
 // adding min range here
 
-let minField=document.getElementById('minField')
+let minField = document.getElementById("minField"); // getting the minvalue from localStorage if it exist
 
+let minRetrivedValue = localStorage.getItem("minValueKey");
 
-let minRetrivedValue=sessionStorage.getItem('minValueKey')
-
-if(maxRetrivedValue===null){
-    var a2=0
-    sessionStorage.setItem('minValueKey',a2)
+if (minRetrivedValue === null) {
+  var a2 = 0; // if it is not present initialzing it with 0
+  localStorage.setItem("minValueKey", a2);
+} else {
+  a2 = minRetrivedValue; // if it is present in the localStorage saving the value of max in a2
+  show_min_range.textContent = minRetrivedValue
 }
 
-else{
-         a2=minRetrivedValue
-    
-}
+// some extra code for keeping the max and min range atleast 10 apart then submit it to the localStorage
+
+//NOTE--- value retrived form localStorage are in the form of string so we have to convert into number using perseInt
+let b3 = parseInt(b2);
+let a3 = parseInt(a2);
+let rangeArray = vocabArray.slice(a3,b3+1)
 
 
+/// Saving the range array in localstorage
 
 
-
-submitButton1.addEventListener('click',(event)=>{
-    //  event.preventDefault()
-    
+let retrived_range_array = localStorage.getItem('range_array_key')
+if (retrived_range_array == null) {
+  retrived_range_array = localStorage.setItem('range_array_key',JSON.stringify(rangeArray))
   
-    if(maxField.value < minField.value){
-        b2 = minField.value
-        a2=maxField.value
-    }
-    else{
-        b2 = maxField.value
-        a2 = minField.value
-    }
+}
 
-    b2 = parseInt(b2)
-    a2 = parseInt(a2)
-    if ((b2 - a2) <10){
-        b2 = a2 +10
-    }
-   
-    sessionStorage.setItem('maxValueKey',b2)
-    sessionStorage.setItem('minValueKey',a2)
-   if(document.getElementById('minField').value !="" && document.getElementById('maxField').value !=""){
+retrived_range_array = JSON.parse(retrived_range_array)
+
+
+
+if (retrived_range_array.length == 0) {
+  alert("You have answered all the words correctly in this range now you need to reset the range")
+  document.getElementById('imageContainer').style.display = "none"
+  
+  
+}
+else{
+  document.getElementById('imageContainer').style.display = "block"
+}
+
+minField.addEventListener('keydown',e => {
+  if (e.key == '.') {
+    e.preventDefault()
+  }
+})
+
+maxField.addEventListener('keydown',e => {
+  if (e.key == '.') {
+    e.preventDefault()
+  }
+})
+
+
+
+submitButton1.addEventListener("click", (event) => {
+
+  // handling if one of the input field is empyt
+  if (   document.getElementById("minField").value.trim() == ""  ||   document.getElementById("maxField").value.trim() == "") {
+    alert("please provide the numbers")
     event.preventDefault()
-    window.location.reload()
-   }
-})
+    minField.value = ""
+    maxField.value = ""
+    return
+    
+  }
+
+  if(parseInt(maxField.value) > vocabArray.length){
+    alert(`Max Range can not be greater than ${vocabArray.length}`)
+    event.preventDefault()
+    minField.value = ""
+    maxField.value = ""
+    
+    return
+  }
+
+   if(parseInt(minField.value) < 0){
+    alert(`Min Range can not be negative`)
+    event.preventDefault()
+     minField.value = ""
+    maxField.value = ""
+    return
+  }
+
+  if (parseInt(minField.value) > parseInt(maxField.value)) {
+
+    alert('Min Range can not be greater than Max Range')
+     event.preventDefault()
+      minField.value = ""
+    maxField.value = ""
+     return
+  }
+
+
+  
+
+  if(parseInt(maxField.value) - parseInt(minField.value) < 10) {
+   alert("Min Range and Max Range should be atleast 10 apart ")
+   event.preventDefault()
+    minField.value = ""
+    maxField.value = ""
+   return
+  }
+
+  
 
 
 
-let b3=parseInt(b2)
-b3 = b3-1
-let a3=parseInt(a2)
-let random2=Math.round(a3+(b3-a3)*Math.random())
 
-let random3=Math.round(a3+(b3-a3)*Math.random())
+  a2 = minField.value
+  b2 = maxField.value
+  b2 = parseInt(b2);
+  a2 = parseInt(a2);
+  /// because we are getting b2 as a number so we are not slicing upto the last elemment means b2 + 1 
+   rangeArray = vocabArray.slice(a2,b2)
+   localStorage.setItem('range_array_key',JSON.stringify(rangeArray))
 
-let random4=Math.round(a3+(b3-a3)*Math.random())
+  // because index starts from 0 we need to subtract 1 from the maxrange so that it does not go beyond the range
+  b2 = b2 - 1
+  localStorage.setItem("maxValueKey", b2);
+  localStorage.setItem("minValueKey", a2);
 
-let random5=Math.round(a3+(b3-a3)*Math.random())
-let checker=0
+  // refresing the page after the min and max has been set
+  if ( document.getElementById("minField").value != "" &&  document.getElementById("maxField").value != "") {
+    event.preventDefault();
+    window.scrollTo(0, 0);
+    window.location.reload();
+    minField.value = ""
+    maxField.value=""
+    
+  }
+
+  
 
 
-let Image1
-let Image2
-let Image3
-let Image4
+});
 
-while (checker != 1){
 
-    if(ArrayOfImages[random2]!=ArrayOfImages[random3] && ArrayOfImages[random2]!=ArrayOfImages[random4] && ArrayOfImages[random2]!=ArrayOfImages[random5] && ArrayOfImages[random3]!=ArrayOfImages[random4] && ArrayOfImages[random3]!=ArrayOfImages[random5] && ArrayOfImages[random4]!=ArrayOfImages[random5]){
-        checker=1
-       }
-       
-       
-       
-       else{  random2=Math.round(a3+(b3-a3)*Math.random())
-           
-           random3=Math.round(a3+(b3-a3)*Math.random())
-           
-           random4=Math.round(a3+(b3-a3)*Math.random())
 
-           random5=Math.round(a3+(b3-a3)*Math.random())
-       }
-   
+// generating three random numbers fromt the total pool of random numbers 
+let random2 = Math.floor(0 + (ArrayOfImages.length - 0) * Math.random());
+let random3 = Math.floor(0 + (ArrayOfImages.length - 0) * Math.random());
+let random4 = Math.floor(0 + (ArrayOfImages.length - 0) * Math.random());
 
-       console.log("*****************hellooo*********************")
-   }
-   
-   
+// generating the random number for the target word from the local storage
+let randomWordIndex = Math.floor(0 + (retrived_range_array.length - 0) * Math.random());
+  let word = retrived_range_array[randomWordIndex];
+let random5 = vocabArray.indexOf(word)
 
-window.addEventListener('load',()=>{
-    let element = document.getElementById('mainContainer')
-    element.scrollIntoView()
-    // 
-})
+let flag = 0;
 
+
+
+ while (flag != 1){
+
+ if(ArrayOfImages[random2]!=ArrayOfImages[random3] && 
+  ArrayOfImages[random2]!=ArrayOfImages[random4] &&
+   ArrayOfImages[random2]!=ArrayOfImages[random5] &&
+    ArrayOfImages[random3]!=ArrayOfImages[random4] &&
+     ArrayOfImages[random3]!=ArrayOfImages[random5] && 
+     ArrayOfImages[random4]!=ArrayOfImages[random5]){
+         flag=1
+  }
+
+else{  random2=Math.floor(a3+(b3-a3)*Math.random())
+
+    random3=Math.floor(a3+(b3-a3)*Math.random())
+
+    random4=Math.floor(a3+(b3-a3)*Math.random())
+
+}
+
+    }
+
+
+
+
+
+window.addEventListener("load", () => {
+  let element = document.getElementById("mainContainer");
+  element.scrollIntoView();
+  //
+});
 
 setTimeout(() => {
-    let randomArray=[random2,random3,random4,random5]
-    let a6=0
-    let b6=3
-   let random6=Math.round(a6+(b6-a6)*Math.random())
+  // choosing random position for the target word and it's image so that the correct word does not settle in the same position
+  let randomArray = [random2, random3, random4, random5];
 
+
+// The shuffle function
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]]; // Swaps elements
+  }
+  return array;
+}
+
+// Shuffle randomArray array
+shuffle(randomArray);
+
+
+
+
+  mainWord.textContent = word
+
+  // adding scroll to the word when user click on the word it takes him/her to the word meaning
+  mainwordlink.setAttribute('href',`#${word}2`)
+
+
+  /// using puter.ai for the text to audio generation without using any audios at all.
+  PlayButton.addEventListener("click", () => {
+    //   SpeakAloud.play()
+    puter.ai.txt2speech(word, "en-US").then((audio) => {
+      audio.play();
+    });
+  });
+
+
+  // showing the word number as index starts from 0 adding 1 so that it shows correct number
+  let err = document.createElement('p')
+        shower.append(err)
+  wordNumber.textContent = random5 + 1;
+
+
+  // checking whether the answer is right or wrong 
+  if (flag == 1) {
+    for (let i =0; i< randomArray.length;i++) {
+      images_element_list[i].src = ArrayOfImages[randomArray[i]]
+      
+      images_element_list[i].addEventListener("click", () => {
  
-       let value=vocabArray[randomArray[random6]] 
-      mainwordlink.setAttribute('href',`#${value}2`)
-    let elements=document.getElementById(`${value}2`)
-    mainWord.addEventListener('click',()=>{
-  
-    }) 
-
-   
-    
-   
-    
-    
-      if(value==undefined){
-        mainwordlink.setAttribute('href','#Whisper')
-      }
-
-       mainWord.textContent=vocabArray[randomArray[random6]] 
-      console.log(mainWord.textContent)
-  
-      
-    
-       SpeakAloud.setAttribute('src',ArrayOfAudios[randomArray[random6]])
-
-
-       PlayButton.addEventListener('click',()=>{
-          SpeakAloud.play()
-      }) 
-      
-
-       wordNumber.textContent=randomArray[random6]+1
-    if(checker==1){
-           
-     Image1=document.createElement('img')
-    Image1.setAttribute('src',ArrayOfImages[random2])
-    Image1.setAttribute('id',vocabArray[random2])
-    imagesId.appendChild(Image1)
-    
-     Image2=document.createElement('img')
-    
-    Image2.setAttribute('src',ArrayOfImages[random3])
-    Image2.setAttribute('id',vocabArray[random3])
-    imagesId.appendChild(Image2)
-    
-     Image3=document.createElement('img')
-    
-    Image3.setAttribute('src',ArrayOfImages[random4])
-    Image3.setAttribute('id',vocabArray[random4])
-    imagesId.appendChild(Image3)
-    
-     Image4=document.createElement('img')
-    Image4.setAttribute('src',ArrayOfImages[random5])
-    Image4.setAttribute('id',vocabArray[random5])
-    imagesId.appendChild(Image4)
+        
+        if (ArrayOfImages.indexOf(ArrayOfImages[randomArray[i]]) == vocabArray.indexOf(word)) {
+          // removing the word you have got right from the rangeArray so that it is not repeated again
+          const index = retrived_range_array.indexOf(word);
+          retrived_range_array.splice(index, 1);
+          localStorage.setItem('range_array_key',JSON.stringify(retrived_range_array))
+            err.textContent="right answer"
+           err.classList.add("correct");
+            shower.appendChild(err)
+          
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        } else {
+          err.textContent="wrong answer"
+         err.classList.add("wrong");
+         shower.appendChild(err)
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        }
+      });
     }
-
-      // console.log(ArrayOfImages[99])
-      let err=document.createElement('p')
-
-      Image1.addEventListener('click',()=>{
-          if(Image1.id==mainWord.textContent){
-              let gifElement=document.createElement('img')
-              gifElement.setAttribute('src',gifSource)
-              gifContainer.appendChild(gifElement)
-              body.appendChild(gifContainer)
-              err.textContent="right answer"
-            //   audio.play()
-              err.classList.add('rightAnswer')
-              shower.appendChild(err)
-              intialRightScore++
-              scoreValueRight=intialRightScore
-              sessionStorage.setItem('rightScore',JSON.stringify(scoreValueRight))
-              rightScoreValue.textContent=scoreValueRight
-  
-             setTimeout(() => {
-              window.location.reload()
-             }, 2000);
-          }
-      
-          else if(Image1.id!=mainWord.textContent){
-              err.textContent="wrong answer"
-              err.classList.add('worngAnswer')
-              shower.appendChild(err)
-              intialWrongScore++
-              scoreValueWrong=intialWrongScore
-              sessionStorage.setItem('wrongScore',JSON.stringify(scoreValueWrong))
-              wrongScoreValue.textContent=scoreValueWrong
-              setTimeout(() => {
-                  window.location.reload()
-                 }, 1000);
-          }
-      })
-  
-      
-     
-  
-      Image2.addEventListener('click',()=>{
-          if(Image2.id==mainWord.textContent){
-              let gifElement=document.createElement('img')
-              gifElement.setAttribute('src',gifSource)
-              gifContainer.appendChild(gifElement)
-              body.appendChild(gifContainer)
-              err.textContent="right answer"
-            //   audio.play()
-              err.classList.add('rightAnswer')
-              shower.appendChild(err)
-              intialRightScore++
-              scoreValueRight=intialRightScore
-              sessionStorage.setItem('rightScore',JSON.stringify(scoreValueRight))
-              rightScoreValue.textContent=scoreValueRight
-              setTimeout(() => {
-                  window.location.reload()
-                 }, 2000);
-          }
-      
-          else if(Image2.id!=mainWord.textContent){
-  
-              err.textContent="wrong answer"
-              err.classList.add('worngAnswer')
-              shower.appendChild(err)
-              intialWrongScore++
-              scoreValueWrong=intialWrongScore
-              sessionStorage.setItem('wrongScore',JSON.stringify(scoreValueWrong))
-              wrongScoreValue.textContent=scoreValueWrong
-              setTimeout(() => {
-                  window.location.reload()
-                 }, 1000);
-          }
-      })
-  
-  
-      Image3.addEventListener('click',()=>{
-          if(Image3.id==mainWord.textContent){
-              let gifElement=document.createElement('img')
-              gifElement.setAttribute('src',gifSource)
-              gifContainer.appendChild(gifElement)
-              body.appendChild(gifContainer)
-              err.textContent="right answer"
-            //   audio.play()
-              err.classList.add('rightAnswer')
-              shower.appendChild(err)
-              intialRightScore++
-              scoreValueRight=intialRightScore
-              sessionStorage.setItem('rightScore',JSON.stringify(scoreValueRight))
-              rightScoreValue.textContent=scoreValueRight
-              setTimeout(() => {
-                  window.location.reload()
-                 },2000);
-          }
-      
-          else if(Image3.id!=mainWord.textContent){
-  
-              err.textContent="wrong answer"
-              err.classList.add('worngAnswer')
-              shower.appendChild(err)
-              intialWrongScore++
-              scoreValueWrong=intialWrongScore
-              sessionStorage.setItem('wrongScore',JSON.stringify(scoreValueWrong))
-              wrongScoreValue.textContent=scoreValueWrong
-              setTimeout(() => {
-                  window.location.reload()
-                 }, 1000);
-          }
-      })
-  
-      Image4.addEventListener('click',()=>{
-          if(Image4.id==mainWord.textContent){
-              let gifElement=document.createElement('img')
-              gifElement.setAttribute('src',gifSource)
-              gifContainer.appendChild(gifElement)
-              body.appendChild(gifContainer)
-              err.textContent="right answer"
-            //   audio.play()
-              err.classList.add('rightAnswer')
-              shower.appendChild(err)
-              intialRightScore++
-              scoreValueRight=intialRightScore
-              sessionStorage.setItem('rightScore',JSON.stringify(scoreValueRight))
-              rightScoreValue.textContent=scoreValueRight
-              setTimeout(() => {
-                  window.location.reload()
-                 }, 2000);
-          }
-      
-          else if(Image4.id!=mainWord.textContent){
-              err.textContent="wrong answer"
-              err.classList.add('worngAnswer')
-              shower.appendChild(err)
-              intialWrongScore++
-              scoreValueWrong=intialWrongScore
-              sessionStorage.setItem('wrongScore',JSON.stringify(scoreValueWrong))
-              wrongScoreValue.textContent=scoreValueWrong
-              setTimeout(() => {
-                  window.location.reload()
-                 }, 1000);
-          }
-      })
-  
-  
-
-    
-   }, 500);
-
-
-
-
-   
-  
+  }
+}, 500);
 
