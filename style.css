@@ -1,197 +1,532 @@
 
-html{
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-}
+/* ==============================
+   GLOBAL STYLES
+============================== */
 
-body{
-    overflow-x: hidden;
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
-#mainContainer{
+
+body {
+    min-height: 100vh;
+    font-family: 'Edu NSW ACT Foundation', sans-serif;
+    background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+    color: #1e293b;
+    padding: 30px 15px;
+}
+
+#mainContainer {
     width: 100%;
+    max-width: 950px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+/* ==============================
+   GAME CONTAINER
+============================== */
+
+#imageContainer {
+    width: 100%;
+    max-width: 650px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 22px;
+    box-shadow: 0 10px 35px rgba(30, 41, 59, 0.10);
+    text-align: center;
+}
+
+.headerContainer {
+    margin-bottom: 15px;
+}
+
+.showText {
+    display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: -20px;
-
+    min-height: 55px;
 }
-#imagesId{
+
+#mainwordlink {
+    text-decoration: none;
+    color: inherit;
+}
+
+#mainWord {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 5vw, 42px);
+    letter-spacing: 2px;
+    color: #4338ca;
+}
+
+/* ==============================
+   AUDIO BUTTON
+============================== */
+
+#playButton {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #eef2ff;
+    color: #4f46e5;
+    font-size: 21px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+
+
+
+#playButton:hover {
+    background: #4f46e5;
+    color: white;
+    transform: scale(1.1);
+}
+
+#wordNumber {
+    display: block;
+    margin: 8px 0 15px;
+    font-size: 14px;
+    color: #64748b;
+}
+
+/* ==============================
+   FOUR IMAGE GRID
+============================== */
+
+.images {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.images img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 3px solid #f1f5f9;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.images img:hover {
+    transform: scale(1.025);
+    box-shadow: 0 7px 18px rgba(79, 70, 229, 0.18);
+}
+
+/* ==============================
+   ANSWER / LETTER AREA
+============================== */
+
+
+/* ANSWER FEEDBACK CONTAINER */
+#shower {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    min-height: 60px;
+}
+
+/* COMMON PARAGRAPH STYLING */
+#shower p {
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+    letter-spacing: 0.5px;
+    animation: feedbackAppear 0.4s ease;
+}
+
+/* CORRECT ANSWER */
+#shower p.correct {
+    color: #166534;
+    background: #dcfce7;
+    border: 2px solid #22c55e;
+    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.25);
+}
+
+/* WRONG ANSWER */
+#shower p.wrong {
+    color: #991b1b;
+    background: #fee2e2;
+    border: 2px solid #ef4444;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.25);
+}
+
+/* ANIMATION */
+@keyframes feedbackAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ==============================
+   RANGE SETTINGS
+============================== */
+
+#inputContainer {
+    width: 100%;
+    max-width: 650px;
+    padding: 25px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(30, 41, 59, 0.08);
+    text-align: center;
+}
+
+#total_shower_container,
+#min_max_shower_container {
+    margin-bottom: 12px;
+    font-size: 16px;
+    color: #475569;
+}
+
+#total_number_of_words,
+#show_min_range,
+#show_max_range {
+    color: #4338ca;
+    font-weight: bold;
+}
+
+#inputContainer form {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    
+    gap: 10px;
+    margin-top: 18px;
 }
 
-#imagesId img{
-    width: 150px;
-    height:150px;
-    border: 2px solid rgba(94, 91, 91, 0.644);
-    margin-left: 3px;
-    border-radius: 4px;
-    
+#inputContainer input {
+    width: 135px;
+    height: 43px;
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    outline: none;
+    font-family: inherit;
+    font-size: 16px;
+    background: #f8fafc;
+    transition: 0.2s ease;
 }
 
+#inputContainer input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.13);
+}
 
+#submitButton1 {
+    min-width: 100px;
+    height: 43px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 9px;
+    background: #4f46e5;
+    color: white;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
 
-#imageContainer{
+#submitButton1:hover {
+    background: #3730a3;
+    transform: translateY(-2px);
+}
+
+/* ==============================
+   SCROLL TO TOP
+============================== */
+
+#scroolup {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 100;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    transition: 0.25s ease;
 }
 
-#mainWord{
-    font-size: 2.2rem;
-    font-weight: bolder;
-     font-family: 'Bebas Neue' ; 
-     font-family: 'Edu NSW ACT Foundation'; 
-}
-#shower{
-    font-size: 1rem;
-    font-weight: bolder;
-   font-family: sans-serif;
-    margin-bottom: 13px;
+#scroolup img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
 }
 
-#scoreRight {
-    font-size: 2rem;
-    font-weight: normal;
-    font-family: 'Edu NSW ACT Foundation', cursive;   
-
+#scroolup:hover {
+    transform: translateY(-4px);
 }
 
-#scoreWrong {
-    font-size: 2rem;
-    font-weight: normal;
-    font-family: 'Edu NSW ACT Foundation', cursive;   
-    margin-top: -15px;
+/* ==============================
+   TABLET
+============================== */
 
-}
-/* .showText{
-    display: flex;
+@media (max-width: 768px) {
 
-} */
-
-.showText a{
-    text-decoration: none;
-    text-transform: none;
-
-}
-
-a, a:visited, a:hover, a:active {
-    color: inherit;
-  }
-
-.rightAnswer{
-    color: green;
-    font-size: 1.7rem;
-    font-weight: bold;
-    font-family: 'Edu NSW ACT Foundation', cursive;   
-}
-
-.worngAnswer{
-    color: red;
-    font-size: 1.7rem;
-    font-weight: bold;
-    font-family: 'Edu NSW ACT Foundation', cursive;   
-
-}
-
-#wordNumber{
-    font-size: 1.2rem;
-    margin-bottom: 12px;
-    font-weight: bolder;
-}
-
-
-
-
-#fireWork{
-    /* width: 100%; */
-    position: absolute;
-    min-width: 300px;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 50%;
-    margin: 0 auto;
-}
-
-#meaningContent{
-    margin-top: 1500px;
-    text-transform: capitalize;
-}
-
-#scroolup{
-    /* background-color: rgba(4, 4, 4, 0.834); */
-    position: fixed;
-    top: 60%;
-    right: 3%;
-}
-#scroolup object{
-    font-size: 1.5rem;
-    padding: .35rem .45rem;
-    color: white;
-}
-
-
-#fireWork img{
-    width: 100%;
-    margin: 0 auto;
-    min-width: 300px;
-}
-
-.adjust{
-    height: 100px;
-    width: 100px;
-    border: 2px solid red;
-    margin: 10px 0;
-}
-
-#inputContainer{
-    position: absolute;
-    top: 1000px;
- }
-
-
-
-
-
-@media only screen and (max-width: 700px) {
-    .single__image{
-        border: 2px solid rgba(109, 107, 107, 0.767);
-        margin-left: 3px;
-        border-radius: 5px;
-        
+    body {
+        padding: 20px 12px;
     }
 
-    
-#fireWork{
-    /* width: 100%; */
-    position: absolute;
-    min-width: 300px;
-    top: 100px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 50%;
-    margin: 0 auto;
+    #mainContainer {
+        gap: 18px;
+    }
+
+    #imageContainer {
+        padding: 18px;
+    }
+
+    #inputContainer {
+        padding: 20px 15px;
+    }
+
+}
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 12px 8px;
+    }
+
+    #imageContainer {
+        padding: 13px;
+        border-radius: 16px;
+    }
+
+    .images {
+        gap: 8px;
+    }
+
+    .images img {
+        border-radius: 10px;
+        border-width: 2px;
+    }
+
+    #mainWord {
+        font-size: 30px;
+    }
+
+    #playButton {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    #inputContainer {
+        padding: 18px 12px;
+    }
+
+    #inputContainer form {
+        gap: 8px;
+    }
+
+    #inputContainer input {
+        width: calc(50% - 5px);
+        min-width: 0;
+    }
+
+    #submitButton1 {
+        width: 100%;
+    }
+
+    #shower {
+        gap: 6px;
+    }
+
+    #shower button {
+        min-width: 34px;
+        min-height: 36px;
+        font-size: 16px;
+    }
+
+    #scroolup {
+        right: 12px;
+        bottom: 12px;
+        width: 40px;
+        height: 40px;
+    }
 }
 
 
-  }
+
+
+/* for the word meaning list section this is the css  */
 
 
 
+/* ==================================
+   VOCABULARY REFERENCE SECTION
+================================== */
 
- .imagesElement{
-    width: 200px;
-    height: 200px;
-    border: 2px solid red;
-    margin: 20px 0;
- }
+#referenceContainer {
+    width: 100%;
+    max-width: 950px;
+    margin: 35px auto 20px;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(30, 41, 59, 0.08);
+    margin-top: 200px;
+}
+
+/* Individual vocabulary card */
+
+.content {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 5px 8px;
+
+    padding: 18px 20px;
+    margin-bottom: 12px;
+
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #6366f1;
+    border-radius: 12px;
+
+    transition: background 0.2s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.content:hover {
+    background: #f1f5ff;
+    transform: translateX(3px);
+    box-shadow: 0 5px 15px rgba(79, 70, 229, 0.08);
+}
+
+/* English word */
+
+.content .word {
+    margin: 0;
+    color: #3730a3;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 23px;
+    letter-spacing: 0.5px;
+    font-weight: normal;
+}
+
+/* Punctuation */
+
+.content .dot,
+.content .dash {
+    color: #94a3b8;
+    font-weight: bold;
+}
+
+/* Hindi meaning */
+
+.content .meaning {
+    margin: 0;
+    color: #334155;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+/* Example sentence container */
+
+.content .sentenceExample {
+    width: 100%;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+
+    margin-top: 10px;
+    padding: 11px 13px;
+
+    background: #eef2ff;
+    border-radius: 8px;
+}
+
+/* Example label */
+
+.content .example {
+    flex-shrink: 0;
+    color: #4f46e5;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* Example sentence */
+
+.content .sentence {
+    margin: 0;
+    color: #475569;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* ==================================
+   MOBILE RESPONSIVENESS
+================================== */
+
+@media (max-width: 600px) {
+
+    #referenceContainer {
+        padding: 13px;
+        margin-top: 22px;
+        border-radius: 15px;
+    }
+
+    .content {
+        padding: 14px;
+        margin-bottom: 10px;
+        gap: 4px 6px;
+        border-radius: 10px;
+    }
+
+    .content .word {
+        font-size: 21px;
+    }
+
+    .content .meaning {
+        font-size: 15px;
+    }
+
+    .content .sentenceExample {
+        padding: 9px;
+        gap: 6px;
+        margin-top: 8px;
+    }
+
+    .content .example {
+        font-size: 14px;
+    }
+
+    .content .sentence {
+        font-size: 14px;
+    }
+}
